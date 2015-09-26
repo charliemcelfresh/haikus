@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20150921044527) do
+ActiveRecord::Schema.define(version: 20150926030932) do
 
   create_table "haikus", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -23,6 +23,13 @@ ActiveRecord::Schema.define(version: 20150921044527) do
     t.string   "content"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "sessions", force: :cascade do |t|
+    t.string   "oauth_token"
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "user_id"
   end
 
   create_table "users", force: :cascade do |t|
