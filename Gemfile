@@ -8,8 +8,6 @@ gem "active_model_serializers", github: "rails-api/active_model_serializers"
 gem 'omniauth-github', github: 'intridea/omniauth-github'
 gem 'figaro'
 
-gem 'jsonapi-serializers'
-
 group :development, :test do
   gem 'spring'  
   gem 'byebug'
@@ -18,8 +16,6 @@ group :development, :test do
   gem 'rspec-rails', '~> 3.0'
   gem 'sqlite3'
   gem 'simplecov', :require => false
-
-  gem 'responders', '~> 2.0'
 end
 
 group :production do

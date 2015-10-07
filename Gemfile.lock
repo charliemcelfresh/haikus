@@ -88,8 +88,6 @@ GEM
     hashie (3.4.2)
     i18n (0.7.0)
     json (1.8.3)
-    jsonapi-serializers (0.3.0)
-      activesupport
     jwt (1.5.1)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -148,8 +146,6 @@ GEM
       rake (>= 0.8.7)
       thor (>= 0.18.1, < 2.0)
     rake (10.4.2)
-    responders (2.1.0)
-      railties (>= 4.2.0, < 5)
     rspec (3.3.0)
       rspec-core (~> 3.3.0)
       rspec-expectations (~> 3.3.0)
@@ -210,11 +206,9 @@ DEPENDENCIES
   capistrano-rvm
   factory_girl_rails
   figaro
-  jsonapi-serializers
   omniauth-github!
   pg
   rails (= 4.2.4)
-  responders (~> 2.0)
   rspec-rails (~> 3.0)
   rspec_api_documentation
   simplecov

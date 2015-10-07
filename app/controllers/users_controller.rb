@@ -1,54 +1,43 @@
 class UsersController < ApplicationController
 
-	def index
-		users = User.all
-		render json: serialize_models(users)
-	end
+  def index
+    users = User.all
+    render json: users
+  end
 
-	def show
-		user =  User.find(params[:id])
-		render json: serialize_model(user)
-	end
+  def show
+    user =  User.find(params[:id])
+    render json: user
+  end
 
-	def create
-		user = User.new(user_params)
-		if user.save
-			render json: serialize_model(user), status: 201
-		else
-			render json: { errors: user.errors }, status: 422
-		end
-	end
+  def create
+    user = User.new(user_params)
+    if user.save
+      render json: user, status: 201
+    else
+      render json: { errors: user.errors }, status: 422
+    end
+  end
 
-	def update
-		user = User.find(params[:id])
+  def update
+    user = User.find(params[:id])
 
-		if user.update(user_params)
-			render json: serialize_model(user), status: 200
-		else
-			render json: { errors: user.errors }, status: 422
-		end
-	end
+    if user.update(user_params)
+      render json: user, status: 200
+    else
+      render json: { errors: user.errors }, status: 422
+    end
+  end
 
-	def destroy
-		user = User.find(params[:id])
-		user.destroy
-		head 204
-	end
+  def destroy
+    user = User.find(params[:id])
+    user.destroy
+    head 204
+  end
 
-private
 
-	def user_params
-		params.require(:user).permit(:email)
-	end
-
-	def serialize_model(model, options = {})
-		options[:is_collection] = false
-		JSONAPI::Serializer.serialize(model, options)
-	end
-
-	def serialize_models(models, options = {})
-		options[:is_collection] = true
-		JSONAPI::Serializer.serialize(models, options)
-	end
-
+  private
+    def user_params
+      params.require(:user).permit(:email)
+    end
 end

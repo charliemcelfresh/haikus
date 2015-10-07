@@ -1,15 +1,15 @@
 require 'spec_helper'
 
 describe User do 
-	before { @user = User.new(email: "user@example.com")}
+	before { @user = User.new(email: "user@example.com") }
 
 	subject { @user }
 
-	it { should respond_to(:email)}
+	it { should respond_to(:email) }
 
 	describe "when email is not present" do
-    	before {@user.email = ""}
-    	it {should_not be_valid}
+    	before { @user.email = "" }
+    	it { should_not be_valid }
   	end
 
   	describe "when email format is invalid" do
@@ -43,11 +43,11 @@ describe User do
 	      user_with_same_email.save 
 	      # if the case is invalid, like the one above, save will be false, which is what we want
 	    end 
-	    it { should_not be_valid}
+	    it { should_not be_valid }
 	end
 
 	describe "email address with mixed case" do
-	    let(:mixed_case_email) {"Foo@ExAMPle.CoM"}
+	    let(:mixed_case_email) { "Foo@ExAMPle.CoM" }
 
 	    it "should be saved as all lower-case" do
 		    @user.email = mixed_case_email
