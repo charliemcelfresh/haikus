@@ -4,8 +4,8 @@ Rails.application.routes.draw do
   get '/auth/failure' => 'sessions#auth_failed'
 
   delete '/sessions/:id' => 'sessions#destroy'
-  resources :tags, only: [:create, :update, :destroy], constraints: {format: :json} 
+  resources :users
+  resources :tags, only: [:create, :update, :destroy], constraints: {format: :json}
 
   root to: 'haikus#index'
 end
-
