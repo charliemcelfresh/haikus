@@ -8,10 +8,7 @@
 
 
 5.times do |i|
-  Haiku.create()
+  h = Haiku.new()
+  h.lines.build([{content: "This is the first one"}, {content: "How do I write a haiku"}, {content: "I can live with this"}])
+  h.save
 end
-
-Line.create(haiku_id: 1, content: "This is the first one")
-Line.create(haiku_id: 1, content: "How do I write a haiku")
-Line.create(haiku_id: 1, content: "I can live with this")
-

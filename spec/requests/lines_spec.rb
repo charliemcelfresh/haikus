@@ -6,8 +6,8 @@ describe "lines", type: :request do
   let(:line) { haiku.lines.first }
 
   describe "lines#index", type: :request do
-   let!(:line2) { FactoryGirl.create(:line, haiku_id: haiku.id, content: "Line 2") }
-   let!(:line3) { FactoryGirl.create(:line, haiku_id: haiku.id, content: "Line 3") }
+   let!(:line2) { haiku.lines.create({content: "Line 2"}) }
+   let!(:line3) { haiku.lines.create({content: "Line 3"}) }
 
     it "should output collection of lines" do
       get "/haikus/#{haiku.id}/lines", {format: :json}
@@ -17,9 +17,9 @@ describe "lines", type: :request do
     end
   end
 
-  describe "lines#create", type: :request do  
+  describe "lines#create", type: :request do
     it "should create line using valid data" do
-      post "/haikus/#{haiku.id}/lines", format: :json, haiku_id: haiku.id, content: "let's make a haiku" 
+      post "/haikus/#{haiku.id}/lines", format: :json, haiku_id: haiku.id, content: "let's make a haiku"
       expect(response.status).to eq(201)
       expect(Line.last.content).to eq("let's make a haiku")
     end

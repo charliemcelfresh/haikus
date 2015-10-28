@@ -34,6 +34,15 @@ class HaikusController < ApplicationController
     head 204
   end
 
+  def random
+    haiku = RandomHaiku.new
+    if haiku.save
+      render json: haiku.lines, status: 201
+    else
+      render json: '400', status: 400
+    end
+  end
+
   private
 
   def haiku_params
@@ -43,5 +52,5 @@ class HaikusController < ApplicationController
   def line_params
     params.permit(:haiku_id, :content)
   end
-  
+
 end

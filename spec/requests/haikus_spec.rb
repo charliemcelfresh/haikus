@@ -11,7 +11,7 @@ describe 'haikus', type: :request do
     it 'should have an endpoint' do
       expect(response).to be_success
     end
-    it 'should return an array of haikus' do  
+    it 'should return an array of haikus' do
       body = JSON.parse(response.body)
       expect(body['data'].length).to eq(5)
     end
@@ -40,6 +40,31 @@ describe 'haikus', type: :request do
     end
     it "should not create a new haiku when line content is missing" do
       post '/haikus', format: :json
+      expect(response.status).to eq(400)
+    end
+  end
+
+  describe 'create_random' do
+    it 'should create a new random haiku' do
+      10.times do
+        h = FactoryGirl.build(:haiku)
+        lines = [{content: "first line"}, {content: "Second line"}, {content: "third line"}]
+        h.lines.build(lines)
+        h.save
+      end
+      get '/random-haiku'
+      expect(response.status).to eq(201)
+      body = JSON.parse(response.body)
+      expect(body["data"][0]["attributes"]["content"]).to eq("first line")
+      expect(body["data"][2]["attributes"]["content"]).to eq("third line")
+    end
+
+    it "should not create a random haiku if incorrect params" do
+      h = FactoryGirl.build(:haiku)
+      lines = [{content: "first line"}, {content: "Second line"}, {content: "third line"}]
+      h.lines.build(lines)
+      h.save
+      get '/random-haiku'
       expect(response.status).to eq(400)
     end
   end

@@ -11,7 +11,17 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151012015539) do
+ActiveRecord::Schema.define(version: 20151022224121) do
+
+  create_table "haiku_lines", force: :cascade do |t|
+    t.integer  "line_id"
+    t.integer  "haiku_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  add_index "haiku_lines", ["haiku_id"], name: "index_haiku_lines_on_haiku_id"
+  add_index "haiku_lines", ["line_id"], name: "index_haiku_lines_on_line_id"
 
   create_table "haikus", force: :cascade do |t|
     t.datetime "created_at", null: false
@@ -21,8 +31,9 @@ ActiveRecord::Schema.define(version: 20151012015539) do
   create_table "lines", force: :cascade do |t|
     t.integer  "haiku_id"
     t.string   "content"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.datetime "created_at",  null: false
+    t.datetime "updated_at",  null: false
+    t.integer  "line_number"
   end
 
   add_index "lines", ["haiku_id"], name: "index_lines_on_haiku_id"

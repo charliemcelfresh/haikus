@@ -1,11 +1,13 @@
 class LinesController < ApplicationController
   def index
-    lines = Line.eager_load(:haiku).where("haiku_id = ?", params[:haiku_id])
+    haiku = Haiku.find(params[:haiku_id])
+    lines = haiku.lines
     render json: lines, each_serializer: LineSerializer
   end
 
   def create
-    line = Line.new(line_params)
+    haiku = Haiku.find(params[:haiku_id])
+    line = haiku.lines.build(line_params)
     if line.save
       render json: line, status: 201
     else
@@ -39,4 +41,3 @@ class LinesController < ApplicationController
       params.permit(:haiku_id, :content)
     end
 end
-
