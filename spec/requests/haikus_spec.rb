@@ -3,10 +3,10 @@ require 'rails_helper'
 describe 'haikus', type: :request do
 
   describe 'index' do
-   before :each do
-     haikus_list = FactoryGirl.create_list(:haiku, 5, {"lines_attributes": {"0": {"content": "Haiku line"}}})
-     get '/haikus'
-  end
+    before :each do
+      haikus_list = FactoryGirl.create_list(:haiku, 5, {"lines_attributes": {"0": {"content": "Haiku line"}}})
+      get '/haikus', format: :json
+    end
 
     it 'should have an endpoint' do
       expect(response).to be_success
@@ -20,7 +20,7 @@ describe 'haikus', type: :request do
   describe 'show' do
     let(:haiku) { FactoryGirl.create(:haiku, {"lines_attributes": {"0": {"content": "haiku line"}}} ) }
     before :each do
-      get "/haikus/#{haiku.id}"
+      get "/haikus/#{haiku.id}", format: :json
     end
     it 'should have an endpoint' do
       expect(response).to be_success
